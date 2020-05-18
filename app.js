@@ -32,15 +32,10 @@ app.use('/api/auth', authRouter)
 const messageRouter = require('./Routes/messageRoutes')(Message, io)
 app.use('/api/message', messageRouter)
 
-/*
 // React app
-app.use(express.static(path.join(__dirname, 'react-app')));
-app.get('/react', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'react-app', 'index.html'));
-});
-*/
+app.use(express.static(path.join(__dirname, 'react-app')))
 app.get('*', (req, res) => {
-  res.status(404).send('You are not allowed to be here!')
+  res.sendFile(path.resolve(__dirname, 'react-app', 'index.html'))
 })
 
 io.on('connection', (socket) => {
