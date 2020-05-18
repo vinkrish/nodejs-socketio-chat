@@ -22,7 +22,7 @@ mongoose.connect(process.env.DB_PATH,
 var db = mongoose.connection
 
 app.set('view engine', 'html')
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 8000
 
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
@@ -78,7 +78,6 @@ io.on('connection', (socket) => {
     )
   })
   socket.on('typing', (data) => {
-    console.log(data)
     io.sockets.in(data.receiverId).emit('typing_display', { typing: true, senderId: data.senderId })
   })
 })
