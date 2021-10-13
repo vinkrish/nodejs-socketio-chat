@@ -1,0 +1,39 @@
+{
+  "name": "chat-app-api",
+  "version": "0.0.1",
+  "description": "RESTful Web Services for Chat App",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Vinay K",
+  "license": "ISC",
+  "bugs": {
+    "url": "/bugs"
+  },
+  "homepage": "#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "async": "^3.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "rethinkdb": "^2.4.2",
+    "nodemon": "^2.0.13",
+    "socket.io": "^4.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "nodemon": "^2.0.13"
+  }
+}
