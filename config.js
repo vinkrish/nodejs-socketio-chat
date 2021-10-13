@@ -7,6 +7,6 @@ module.exports = {
     db: process.env.RETHINKDB_NAME || 'test'
   },
   express: {
-    port: process.env.PORT || 8000
+    port: process.env.PORT || 3000
   }
 }

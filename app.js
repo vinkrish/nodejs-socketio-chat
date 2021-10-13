@@ -18,7 +18,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 app.set('view engine', 'html')
-const port = process.env.PORT || 8000
+const port = process.env.PORT || 3000
 
 const server = require('http').createServer(app)
 const io = require('socket.io')(server, { cors: { origin: '*' } })
