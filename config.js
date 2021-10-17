@@ -3,7 +3,7 @@ module.exports = {
     host: process.env.RETHINKDB_HOST || '127.0.0.1',
     port: process.env.RETHINKDB_PORT || 28015,
     username: process.env.RETHINKDB_USERNAME || 'chat',
-    password: process.env.RETHINKDB_PASSWORD || 'UNQp5wlIvD87EC7yjz0ofJ',
+    password: process.env.RETHINKDB_PASSWORD || '',
     db: process.env.RETHINKDB_NAME || 'chat'
   },
   express: {
