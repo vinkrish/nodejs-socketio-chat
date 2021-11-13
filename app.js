@@ -18,7 +18,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 app.set('view engine', 'html')
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 8000
 
 const server = require('http').createServer(app)
 const io = require('socket.io')(server, { cors: { origin: '*' } })
@@ -27,6 +27,8 @@ const authRouter = require('./Routes/authRoutes')(rethinkdb)
 app.use('/api/auth', authRouter)
 const messageRouter = require('./Routes/messageRoutes')(rethinkdb)
 app.use('/api/message', messageRouter)
+const tagsRouter = require('./Routes/tagsRoutes')(rethinkdb)
+app.use('/api/tags', tagsRouter)
 
 // Generic error handling middleware.
 app.use(handleError)
@@ -127,6 +129,17 @@ async.waterfall([
         containsTable,
         { created: 0 },
         rethinkdb.tableCreate('experts')
+      )
+    }).run(connection, function (err) {
+      callback(err, connection)
+    })
+  },
+  function createTagsTable (connection, callback) {
+    rethinkdb.tableList().contains('tags').do(function (containsTable) {
+      return rethinkdb.branch(
+        containsTable,
+        { created: 0 },
+        rethinkdb.tableCreate('tags')
       )
     }).run(connection, function (err) {
       callback(err, connection)
