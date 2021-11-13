@@ -1,6 +1,6 @@
 const express = require('express')
 
-const routes = function (rethinkdb, io) {
+const routes = function (rethinkdb) {
   const messageRouter = express.Router()
 
   const verifyToken = require('./verifyToken')
