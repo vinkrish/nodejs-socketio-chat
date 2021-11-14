@@ -58,6 +58,8 @@ const routes = function (rethinkdb) {
             })
 
             const obj = { id: account.id, firstName: account.firstName, lastName: account.lastName, email: account.email, token }
+            if (tableName === 'experts') obj.isAdmin = true
+            else obj.isAdmin = false
 
             res.status(200).send({ data: obj })
           })

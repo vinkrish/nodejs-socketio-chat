@@ -4,6 +4,7 @@ const rethinkdb = require('rethinkdb')
 const path = require('path')
 const dotenv = require('dotenv')
 const async = require('async')
+const bcrypt = require('bcryptjs')
 
 dotenv.config()
 
@@ -133,6 +134,27 @@ async.waterfall([
     }).run(connection, function (err) {
       callback(err, connection)
     })
+  },
+  function insertAliceUser (connection, callback) {
+    const account = {
+      firstName: 'Alice',
+      lastName: '',
+      email: 'alice@gmail.com',
+      password: bcrypt.hashSync(process.env.ALICE_PASSWORD, 8)
+    }
+    rethinkdb.table('experts').filter(rethinkdb.row('firstName').eq('Alice'))
+      .run(connection, function (err, cursor) {
+        if (err) callback(err, connection)
+        cursor.toArray(function (err, result) {
+          if (err) console.log('Error when creating Alice user!')
+          if (result.length === 0) {
+            rethinkdb.table('experts').insert(account)
+              .run(connection, function (err) {
+                callback(err, connection)
+              })
+          } else callback(err, connection)
+        })
+      })
   },
   function createTagsTable (connection, callback) {
     rethinkdb.tableList().contains('tags').do(function (containsTable) {
